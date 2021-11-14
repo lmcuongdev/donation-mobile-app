@@ -5,7 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.NumberPicker;
+import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,5 +31,15 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.v("Donate", "Donate button created");
         }
+
+        RadioGroup paymentMethod = findViewById(R.id.paymentMethod);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        NumberPicker amountPicker = findViewById(R.id.amountPicker);
+        amountPicker.setMinValue(0);
+        amountPicker.setMaxValue(1000);
+    }
+
+    public void donateButtonClicked(View view) {
+        Log.v("Donate", "Donate button clicked");
     }
 }
