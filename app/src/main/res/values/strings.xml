@@ -4,4 +4,5 @@
 
     <string name="donateTitle">Welcome Homer</string>
     <string name="donateSubtitle">Please Give Generously</string>
+    <string name="donateButton">Donate</string>
 </resources>

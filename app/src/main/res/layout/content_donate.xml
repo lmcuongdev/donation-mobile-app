@@ -28,4 +28,13 @@
         android:layout_marginEnd="-1dp"
         android:text="@string/donateSubtitle"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/donateButton"
+        android:id="@+id/donateButton"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="47dp" />
 </RelativeLayout>
