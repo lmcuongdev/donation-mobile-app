@@ -15,6 +15,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
+    private RadioGroup paymentMethod;
+    private ProgressBar progressBar;
+    private NumberPicker amountPicker;
+    private Button donateButton;
+
+    private int totalDonated = 0;
+    final int MAX_DONATION_AMOUNT = 10000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,20 +33,26 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action",
                 Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show());
-        Button donateButton = findViewById(R.id.donateButton);
-        if (donateButton != null)
-        {
+        this.donateButton = findViewById(R.id.donateButton);
+        if (this.donateButton != null) {
             Log.v("Donate", "Donate button created");
         }
 
-        RadioGroup paymentMethod = findViewById(R.id.paymentMethod);
-        ProgressBar progressBar = findViewById(R.id.progressBar);
-        NumberPicker amountPicker = findViewById(R.id.amountPicker);
-        amountPicker.setMinValue(0);
-        amountPicker.setMaxValue(1000);
+        this.paymentMethod = findViewById(R.id.paymentMethod);
+        this.progressBar = findViewById(R.id.progressBar);
+        this.progressBar.setMax(MAX_DONATION_AMOUNT);
+
+        this.amountPicker = findViewById(R.id.amountPicker);
+        this.amountPicker.setMinValue(0);
+        this.amountPicker.setMaxValue(1000);
     }
 
     public void donateButtonClicked(View view) {
-        Log.v("Donate", "Donate button clicked");
+        int amount = this.amountPicker.getValue();
+        this.totalDonated += amount;
+        this.progressBar.setProgress(totalDonated);
+        String method = this.paymentMethod.getCheckedRadioButtonId() == R.id.PayPal ? "using PayPal" : "directly";
+        Log.v("Donate", "Donated $" + amount + " " + method);
+        Log.v("Donate", "Current donation amount: $" + this.totalDonated);
     }
 }
