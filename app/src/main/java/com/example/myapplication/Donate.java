@@ -7,24 +7,29 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.models.Donation;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
-public class MainActivity extends AppCompatActivity {
+public class Donate extends Base {
     private RadioGroup paymentMethod;
     private ProgressBar progressBar;
     private NumberPicker amountPicker;
     private Button donateButton;
 
-    private int totalDonated = 0;
+    private EditText amountText;
+    private TextView amountTotal;
+
     final int MAX_DONATION_AMOUNT = 10000;
 
     @Override
@@ -33,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_donate);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> Snackbar.make(view, "Replace with your own action",
                 Snackbar.LENGTH_LONG)
@@ -49,15 +55,27 @@ public class MainActivity extends AppCompatActivity {
         this.amountPicker = findViewById(R.id.amountPicker);
         this.amountPicker.setMinValue(0);
         this.amountPicker.setMaxValue(1000);
+        this.amountText = (EditText) findViewById(R.id.paymentAmount);
+        this.amountTotal = (TextView) findViewById(R.id.totalSoFar);
     }
 
     public void donateButtonClicked(View view) {
         int amount = this.amountPicker.getValue();
-        this.totalDonated += amount;
-        this.progressBar.setProgress(totalDonated);
         String method = this.paymentMethod.getCheckedRadioButtonId() == R.id.PayPal ? "using PayPal" : "directly";
-        Log.v("Donate", "Donated $" + amount + " " + method);
-        Log.v("Donate", "Current donation amount: $" + this.totalDonated);
+
+        if (amount == 0)
+        {
+            String text = this.amountText.getText().toString();
+            if (!text.equals(""))
+                amount = Integer.parseInt(text);
+        }
+        if (amount > 0)
+        {
+            newDonation(new Donation(amount, method));
+            progressBar.setProgress(this.totalDonated);
+            String totalDonatedStr = "$" + this.totalDonated;
+            this.amountTotal.setText(totalDonatedStr);
+        }
     }
 
     @Override
