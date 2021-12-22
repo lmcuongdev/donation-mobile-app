@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
             Toast toast = Toast.makeText(this, "Report Selected",
                     Toast.LENGTH_SHORT);
             toast.show();
+            startActivity(new Intent(this, Report.class));
         }
         return super.onOptionsItemSelected(item);
     }
