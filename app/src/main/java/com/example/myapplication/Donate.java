@@ -1,10 +1,7 @@
 package com.example.myapplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,9 +9,7 @@ import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.models.Donation;
@@ -76,22 +71,5 @@ public class Donate extends Base {
             String totalDonatedStr = "$" + this.totalDonated;
             this.amountTotal.setText(totalDonatedStr);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.menuReport) {
-            Toast toast = Toast.makeText(this, "Report Selected",
-                    Toast.LENGTH_SHORT);
-            toast.show();
-            startActivity(new Intent(this, Report.class));
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 }
