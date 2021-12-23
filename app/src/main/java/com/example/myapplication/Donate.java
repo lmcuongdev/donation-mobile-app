@@ -72,6 +72,11 @@ public class Donate extends Base {
     }
 
     @Override
-    public void reset(MenuItem item) {
+    public void reset(MenuItem item)
+    {
+        app.dbManager.reset();
+        app.totalDonated = 0;
+        amountTotal.setText("$" + app.totalDonated);
+        progressBar.setProgress(app.totalDonated);
     }
 }
