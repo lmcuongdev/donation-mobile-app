@@ -39,7 +39,7 @@ public class Base extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
         MenuItem report = menu.findItem(R.id.menuReport);
-        MenuItem donate = menu.findItem(R.id.menuDonate);
+//        MenuItem donate = menu.findItem(R.id.menuDonate);
         report.setEnabled(!donations.isEmpty());
         if (!donations.isEmpty())
             report.setVisible(true);
@@ -57,4 +57,6 @@ public class Base extends AppCompatActivity {
     public void donate(MenuItem item) {
         startActivity(new Intent(this, Donate.class));
     }
+
+    public void reset(MenuItem item) {}
 }
